@@ -1,0 +1,21 @@
+<html layout:decorate="~{layout}">
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div layout:fragment="content">
+	<form th:action="@{/address}" method="post">
+		<input name="address" placeholder="도로명 주소를 입력해주세요." />
+
+		<button type="submit">입력</button>
+	</form>
+
+	<div th:unless="${weather == null}">
+		<img th:src="@{'https://openweathermap.org/img/wn/' + ${weather['weather_icon']} + '.png'}" alt="날씨 아이콘">
+		<li th:text="'날씨 : ' + ${weather['weather_main']}"></li>
+		<li th:text="'도시명 : ' + ${weather['name']}"></li>
+		<li th:text="'날씨 설명 : ' + ${weather['weather_description']}"></li>
+		<li th:text="'온도 : ' + ${weather['temperature']}"></li>
+		<li th:text="'습도 : ' + ${weather['humidity']}"></li>
+	</div>
+</div>
+
+</html>
