@@ -1,0 +1,65 @@
+/* Swiper 전체 컨테이너 */
+.mySwiper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* 가로 16: 세로 9 비율 유지 */
+    margin: auto;
+}
+
+/* 각 슬라이드 */
+.mySwiper .swiper-slide {
+    position: relative; /* 텍스트가 이미지 위에 나타나도록 부모에 상대적 위치 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 이미지 크기 */
+.mySwiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율 유지하며 이미지 잘라서 맞추기 */
+}
+
+/* 이미지 위 텍스트 */
+.mySwiper .slide-content {
+    position: absolute;
+    top: 20px; /* 이미지 위쪽에 텍스트 위치 */
+    left: 50%;
+    transform: translateX(-50%); /* 텍스트를 수평 중앙으로 정렬 */
+    color: white; /* 텍스트 색상 */
+    text-align: center;
+    z-index: 2; /* 텍스트가 이미지 위에 표시되도록 */
+}
+
+/* 제목 스타일 */
+.mySwiper .slide-content h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 설명 텍스트 스타일 */
+.mySwiper .slide-content p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 1200px) {
+    .mySwiper {
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mySwiper {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mySwiper {
+        height: 300px;
+    }
+}

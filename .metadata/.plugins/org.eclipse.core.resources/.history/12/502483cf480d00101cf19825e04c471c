@@ -1,0 +1,64 @@
+/* Swiper 전체 컨테이너 */
+.mySwiper {
+    width: 100%;
+    height: 800px;
+    aspect-ratio: 16 / 9; 
+    margin: auto;
+}
+
+/* 각 슬라이드 */
+.mySwiper .swiper-slide {
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 이미지 크기 */
+.mySwiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* 이미지 위 텍스트 */
+.mySwiper .slide-content {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    color: black; 
+    text-align: center;
+    z-index: 2; 
+}
+
+/* 제목 스타일 */
+.mySwiper .slide-content h2 {
+    font-size: 10rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 설명 텍스트 스타일 */
+.mySwiper .slide-content p {
+    font-size: 4.2rem;
+    margin: 0;
+}
+/* 반응형 스타일 */
+@media (max-width: 1200px) {
+    .mySwiper {
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mySwiper {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mySwiper {
+        height: 300px;
+    }
+}

@@ -1,0 +1,149 @@
+<html layout:decorate="~{layout}">
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/index.css}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
+<script>
+	$(window).on('load', function() {
+	    gallery();
+	});
+
+	function gallery() {
+	    let list = undefined;
+	    let thumbs = undefined;
+	    const slideNum = $('.gallery .list .swiper-slide').length; // 슬라이드 총 개수
+	    let slideInx = 0; // 현재 슬라이드 index
+	    let viewNum = 0;
+	    let loopChk = true;
+
+	    // 디바이스 체크
+	    let oldWChk = window.innerWidth > 767 ? 'pc' : 'mo';
+	    sliderAct();
+
+	    $(window).on('resize', function() {
+	        const newWChk = window.innerWidth > 767 ? 'pc' : 'mo';
+	        if (newWChk !== oldWChk) {
+	            oldWChk = newWChk;
+	            sliderAct();
+	        }
+	    });
+
+	    // 슬라이드 실행
+	    function sliderAct() {
+	        // 슬라이드 초기화
+	        [list, thumbs].forEach(item => item && item.destroy());
+
+	        // slidesPerView 옵션 설정
+	        viewNum = oldWChk === 'pc' ? 5 : 3;
+	        // loop 옵션 체크
+	        loopChk = slideNum > viewNum;
+
+	        // 갤러리 썸네일
+	        thumbs = new Swiper(".gallery .thumbs", {
+	            spaceBetween: 10,
+	            slidesPerView: viewNum,
+	            loopedSlides: viewNum,
+	            loop: loopChk,
+	            watchSlidesVisibility: true,
+	            watchSlidesProgress: true,
+	        });
+
+	        // 메인 슬라이드
+	        list = new Swiper(".gallery .list .inner", {
+	            initialSlide: slideInx,
+	            loopedSlides: viewNum,
+	            loop: loopChk,
+	            effect: "fade",
+	            navigation: {
+	                nextEl: ".gallery .btn_next",
+	                prevEl: ".gallery .btn_prev",
+	            },
+	            on: {
+	                activeIndexChange: function() {
+	                    slideInx = this.realIndex; // 현재 슬라이드 index 갱신
+	                }
+	            },
+	            thumbs: {
+	                swiper: thumbs,
+	            },
+	        });
+	    }
+	}
+</script>
+
+<div class="gallery">
+    <!-- 메인 슬라이드 -->
+    <div class="list">
+        <div class="inner">
+            <ul class="swiper-wrapper slide_list">
+                <li class="swiper-slide">1</li>
+                <li class="swiper-slide">2</li>
+                <li class="swiper-slide">3</li>
+                <li class="swiper-slide">4</li>
+                <li class="swiper-slide">5</li>
+                <li class="swiper-slide">6</li>
+                <li class="swiper-slide">7</li>
+            </ul>
+            <span class="btn btn_prev">이전</span>
+            <span class="btn btn_next">다음</span>
+        </div>
+    </div>
+
+    <!-- 갤러리 썸네일 -->
+    <div class="thumbs">
+        <ul class="swiper-wrapper slide_list">
+            <li class="swiper-slide">1</li>
+            <li class="swiper-slide">2</li>
+            <li class="swiper-slide">3</li>
+            <li class="swiper-slide">4</li>
+            <li class="swiper-slide">5</li>
+            <li class="swiper-slide">6</li>
+            <li class="swiper-slide">7</li>
+        </ul>
+    </div>
+</div>
+
+
+<div layout:fragment="content">
+	<form th:action="@{/address}" method="post">
+		<div class="input-group">
+		<input name="address" style="width: 280px;"placeholder="도로명 주소를 입력해주세요." />
+
+		<button class="btn btn-primary" type="submit">입력</button>
+		</div>
+	</form>
+
+	<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+	    <div class="card text-center mb-3" style="width: 35rem;" sec:authorize="isAnonymous()">
+	        <div class="card-body">
+	            <img class="card-img-top" th:src="@{/images/exweather.png}" alt="날씨 아이콘">
+	            <h5 class="card-title">ClothCast</h5>
+	            <h5 class="card-title">로그인 후 이용해주세요!!!</h5>
+	        </div>
+	    </div>
+
+	    <div class="card text-center mb-3" style="width: 30rem;" sec:authorize="isAuthenticated()" th:unless="${weather == null}">
+	        <div class="card-body">
+	            <img class="card-img-top" th:src="@{'https://openweathermap.org/img/wn/' + ${weather['weather_icon']} + '.png'}" alt="날씨 아이콘">
+				<h5 class="card-title">
+				    <img th:src="@{/images/city.png}" alt="날씨 아이콘" style="vertical-align: middle; width: 20px; height: 20px; margin-right: 10px;">
+				    도시명 : <span th:text="${weather['name']}"></span>
+				</h5>
+	            <ul class="list-group list-group-flush">
+	                <li class="list-group-item" th:text="'날씨 : ' + ${weather['weather_main']}"></li>
+	                <li class="list-group-item" th:text="'날씨 설명 : ' + ${weather['weather_description']}"></li>
+	                <li class="list-group-item">
+						<img th:src="@{/images/temp.png}" alt="온도 픽토그램" style="vertical-align: middle; width: 20px; height: 20px; margin-right: 5px;"/>
+						온도 : <span th:text="${weather['temperature']} + ' °C'"></span>
+					</li>
+	                <li class="list-group-item">
+						<img th:src="@{/images/hum.jpg}" alt="습도 픽토그램" style="vertical-align: middle; width: 16px; height: 20px; margin-right: 5px;"/>
+						습도 : <span th:text="${weather['humidity']}"></span>
+					</li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+</div>
+
+</html>
