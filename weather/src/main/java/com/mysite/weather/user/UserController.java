@@ -55,8 +55,17 @@ public class UserController {
 		return "login_form";
 	}
 	
-	@GetMapping("/profile")
-	public String profile(Principal principal, Model model) {
-		return "/";
-	}
+	 @GetMapping("/profile")
+	    public String profile(Principal principal, Model model) {
+	        // Principal 객체에서 로그인된 사용자의 username을 가져옴
+	        String username = principal.getName();
+
+	        // UserService를 통해 사용자 정보를 조회
+	        SiteUser user = userService.findByUsername(username);
+
+	        // 모델에 사용자 정보를 추가하여 뷰로 전달
+	        model.addAttribute("user", user);
+
+	        return "user_profile";  // 사용자 프로필 화면으로 이동
+	    }
 }

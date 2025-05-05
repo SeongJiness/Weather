@@ -19,4 +19,10 @@ public class UserService {
 		this.userRepository.save(user);
 		return user;
 	}
+	
+	// 사용자 이름으로 사용자 정보를 조회하는 메서드
+    public SiteUser findByUsername(String username) {
+        return userRepository.findByUsername(username)
+            .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));  // 예외 처리
+    }
 }
