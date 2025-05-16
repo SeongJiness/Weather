@@ -163,6 +163,10 @@
 	});
 
 </script>
+
 <footer th:replace="~{footer :: footerFragment}"></footer>
 
+<script th:if="${message != null}" th:inline="javascript">
+    alert('[[${message}]]');
+</script>
 </html>

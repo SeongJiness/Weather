@@ -25,4 +25,22 @@ public class UserService {
         return userRepository.findByUsername(username)
             .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));  // 예외 처리
     }
+    
+    public void save(SiteUser user) {
+        userRepository.save(user);
+    }
+    
+    public void updatePassword(SiteUser user, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+    }
+    
+    public boolean checkPassword(SiteUser user, String rawPassword) {
+        return passwordEncoder.matches(rawPassword, user.getPassword());
+    }
+    
+    public void deleteUser(SiteUser user) {
+        userRepository.delete(user);
+    }
 }
