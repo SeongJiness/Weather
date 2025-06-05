@@ -19,3 +19,8 @@
 10. 이클립스가 열리면 build.gradle을 찾아서 우클릭후 Gradle아래에 그림처럼 Refresh Gradle Project를 누른다. , 그러면 오른쪽 아래에 무언가 다운로드를 받을 텐데 다 다운로드가 될 때 까지 기다린다.
 
 ![alt text](image-3.png) <br> 11. 왼쪽 아래에 weather을 우클릭 하고 start시킨다. <br> 12. 오류가 뜨지 않고 잘 돌아 간다면 크롬 브라우저를 실행한다. <br>13. 크롬에서 http://localhost:8080/을 검색한다. 그러면 구현한 웹사이트가 잘 보일 것이다.
+
+<br>
+혹시나 자바 17버전이상이 아닐경우 https://wikidocs.net/160048을 참고해서 jdk를 다운받아야한다.
+
+Readme.txt가 아니라 Readme.md으로 작성했습니다. 이미지를 이용해서 설명할 것이 있기 때문입니다.
