@@ -1,0 +1,45 @@
+<html layout:decorate="~{layout}">
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
+<div layout:fragment="content" class="container my-3">
+	<div class="my-3 border-bottom">
+		<div>
+			<h4>사용자 정보</h4>
+		</div>
+	</div>
+
+	<div class="mb-3">
+	    <p>아이디: <span class="border border-black" th:text="${user.username}" style="width: 400px; display: inline-block;"></span></p>
+	</div>
+	<div class="mb-3">
+	    <p>이메일: <span class="border border-black" th:text="${user.email}" style="width: 400px; display: inline-block;"></span></p>
+	</div>
+
+	<div class="mb-3">
+	    <a href="/user/profile/edit" class="btn btn-primary">수정</a>
+
+	    <form th:action="@{/user/delete}" method="post" style="display:inline;" onsubmit="return confirm('정말로 탈퇴하시겠습니까?');">
+	        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	        <button type="submit" class="btn btn-danger">탈퇴</button>
+	    </form>
+	</div>
+</div>
+
+<script th:if="${message != null}" th:inline="javascript">
+    alert('[[${message}]]');
+</script>
+
+<script>
+function confirmWithdrawal(event) {
+    if (confirm("정말로 탈퇴하겠습니까?")) {
+        // 탈퇴 처리할 URL로 이동 (예: /user/delete)
+        window.location.href = "/user/delete";
+    } else {
+        // 취소하면 아무 동작 안 함
+        event.preventDefault();
+    }
+}
+</script>
+
+</html>

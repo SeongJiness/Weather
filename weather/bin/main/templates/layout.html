@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <title>ClothCast</title>
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav th:replace="~{navbar :: navbarFragment}"></nav>
+
+    <!-- 페이지 콘텐츠를 여기에 삽입 -->
+    <div layout:fragment="content"></div>
+
+    <!-- 푸터 -->
+    <footer th:replace="~{footer :: Fragment}"></footer>
+</body>
+</html>
