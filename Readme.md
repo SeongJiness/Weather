@@ -8,7 +8,10 @@
    왼쪽 상단의 하단 그림처럼 보이는 아이콘을 클릭한다.
    ![alt text](https://i.ytimg.com/vi/Gbf1yws2sOc/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYACsgWKAgwIABABGBMgYCh_MA8=&rs=AOn4CLB86DQRduBRYylPpz-dsBayMEjKNg) <br>
 
-   그 다음에 그림처럼 입력요소를 입력후에 연결버튼을 누르면 연결이 된다.
+   그 다음에 그림처럼 입력요소를 입력후에 연결버튼을 누르면 연결이 된다. <br>
+   단 기존의 mysql에 root 비밀번호를 따로 설정한게 있다면 빈 공백이 아니라 따로 입력해야한다. <br>
+   ![alt text](image-4.png)
+   만약 비밀번호가 달랐다면 위에 사진에 "spring.datasource.password=" 에 설정한 비밀번호를 넣어야한다.
 
 ![alt text](image-1.png) <br> 8. 사진 처럼 root에 우클릭으로 weather 데이터베이스를 생성한다.
 
